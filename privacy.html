@@ -119,11 +119,11 @@
 <div class="content">
   <p class="page-label">Legal</p>
   <h1>Privacy Policy</h1>
-  <p class="updated">Last updated: June 16, 2026</p>
+  <p class="updated">Last updated: October 2026</p>
 
-  <p>cooksimpl ("we", "us", or "our") operates the cooksimpl mobile application (the "App"). This page describes how we collect, use, and protect your personal information when you use our App and your rights regarding that information.</p>
+  <p>cooksimpl ("we", "us", or "our") built this app to help you cook with what's already in your kitchen. This page explains, in plain terms, what information the app touches and why.</p>
 
-  <p>By using cooksimpl, you agree to the collection and use of information in accordance with this policy.</p>
+  <p>By using cooksimpl, you agree to the collection and use of information as described in this policy.</p>
 
   <hr class="divider">
 
@@ -132,17 +132,18 @@
 
   <h2>2. Information We Collect</h2>
   <ul>
-    <li><strong>Camera & Photos:</strong> The App uses your device camera to scan fridge contents. Photos are sent to Google's Gemini AI for ingredient detection. We do not store your photos on our servers — they are processed in real-time and discarded.</li>
-    <li><strong>Food Preferences:</strong> Dietary preferences and recipe tags you select are stored locally on your device (Apple UserDefaults). We do not transmit this to our servers.</li>
-    <li><strong>Scan Count:</strong> We track how many times you've scanned, stored locally on your device only.</li>
-    <li><strong>Contact Info:</strong> If you contact us via email, we collect your email address and the content of your message to respond to you.</li>
+    <li><strong>Fridge photos & videos:</strong> When you scan your fridge, the photo or video is sent to Google's Gemini AI — and, for a quick first check of whether an image shows food at all, to Cloudflare's AI service — so ingredients can be identified. We do not store these photos or videos on our own servers: they're processed to extract a list of ingredients, then discarded.</li>
+    <li><strong>Food preferences:</strong> Allergies, dietary restrictions, kitchen equipment, and cooking preferences you set in your Food Profile are stored only on your device. When you generate recipes, relevant preferences (for example, an allergy) may be included in the request sent to Google's Gemini AI so recipes can be tailored to you — this information is not stored on our servers.</li>
+    <li><strong>Account sign-in:</strong> If you choose to sign in with Apple or Google, we store only your Apple or Google user ID — and your display name, if you choose to share it — directly on your device. This is used only to track how many free scans you've used. We never receive or store your email, password, or profile anywhere else. If you don't sign in, the app works fully without an account.</li>
+    <li><strong>Scan count:</strong> We track how many times you've scanned, stored locally on your device only.</li>
+    <li><strong>Contact info:</strong> If you contact us via email, we collect your email address and the content of your message to respond to you.</li>
   </ul>
 
   <h2>3. How We Use Your Information</h2>
   <ul>
-    <li>To analyze fridge photos and identify ingredients via Google Gemini AI</li>
+    <li>To analyze fridge photos/videos and identify ingredients via Google's Gemini AI and Cloudflare's AI service</li>
     <li>To generate personalized recipes based on your ingredients and preferences</li>
-    <li>To fetch recipe images via Google Custom Search or Unsplash</li>
+    <li>To track your free-scan usage if you sign in with Apple or Google</li>
     <li>To improve and optimize the App experience</li>
     <li>To respond to your support requests</li>
   </ul>
@@ -150,29 +151,35 @@
   <h2>4. Third-Party Services</h2>
   <p>We use the following third-party services that may process your data:</p>
   <ul>
-    <li><strong>Google Gemini AI</strong> — Processes your fridge photos to identify ingredients and generate recipes. See <a href="https://policies.google.com/privacy" target="_blank">Google's Privacy Policy</a>.</li>
-    <li><strong>Google Custom Search API</strong> — Used to fetch recipe images by name. No personal data is shared.</li>
-    <li><strong>Unsplash</strong> — Used to fetch food photography for recipes. See <a href="https://unsplash.com/privacy" target="_blank">Unsplash's Privacy Policy</a>.</li>
-    <li><strong>Apple App Store</strong> — In-app purchases and subscriptions are processed by Apple. See <a href="https://www.apple.com/privacy/" target="_blank">Apple's Privacy Policy</a>.</li>
+    <li><strong>Google Gemini AI</strong> — Processes your fridge photos/videos to identify ingredients and generate recipes. See <a href="https://policies.google.com/privacy" target="_blank">Google's Privacy Policy</a>.</li>
+    <li><strong>Cloudflare</strong> — Runs a quick, free check on whether a photo shows food before the full analysis, and hosts our backend (recipe database, proxy). See <a href="https://www.cloudflare.com/privacypolicy/" target="_blank">Cloudflare's Privacy Policy</a>.</li>
+    <li><strong>Apple</strong> — Sign in with Apple, and all App Store purchases/subscriptions, which are processed entirely by Apple. See <a href="https://www.apple.com/privacy/" target="_blank">Apple's Privacy Policy</a>.</li>
+    <li><strong>Google</strong> — Sign in with Google. See <a href="https://policies.google.com/privacy" target="_blank">Google's Privacy Policy</a>.</li>
   </ul>
 
   <h2>5. Data Storage & Retention</h2>
-  <p>We do not operate servers that store your personal data. All preferences and usage data are stored locally on your device. Photos sent for analysis are processed in real-time and not retained by us.</p>
+  <p>We do not operate servers that store your personal data. All preferences, sign-in info, and usage data are stored locally on your device. Photos and videos sent for analysis are processed in real time and not retained by us.</p>
   <p>Data stored locally on your device is retained until you delete the App or clear its data through your device settings.</p>
 
-  <h2>6. Children's Privacy</h2>
+  <h2>6. Your Content, Your Responsibility</h2>
+  <p>You control what you photograph. Please only scan your own fridge or kitchen items — avoid including other people, documents, or anything unrelated to food in your photos or videos. cooksimpl is not responsible for content you choose to capture or submit.</p>
+
+  <h2>7. What We Don't Do</h2>
+  <p>We don't show ads. We don't use third-party analytics or advertising trackers. We don't sell your personal information, and we never have.</p>
+
+  <h2>8. Children's Privacy</h2>
   <p>cooksimpl is not directed at children under 13. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us at <a href="mailto:support@cooksimpl.app">support@cooksimpl.app</a> and we will delete it.</p>
 
-  <h2>7. Your Privacy Rights</h2>
+  <h2>9. Your Privacy Rights</h2>
   <p>Depending on where you live, you may have the following rights:</p>
   <ul>
     <li><strong>Right to Access:</strong> Request a copy of the personal data we hold about you.</li>
-    <li><strong>Right to Deletion:</strong> Request that we delete your personal data. Since all data is stored locally, uninstalling the App will remove it from your device.</li>
+    <li><strong>Right to Deletion:</strong> Request that we delete your personal data. Since almost all data is stored locally, uninstalling the App removes it from your device.</li>
     <li><strong>Right to Correction:</strong> Request that we correct inaccurate information about you.</li>
     <li><strong>Right to Withdraw Consent:</strong> You can withdraw consent by uninstalling the App or contacting us.</li>
   </ul>
 
-  <h2>8. Canadian & Québec Residents</h2>
+  <h2>10. Canadian & Québec Residents</h2>
   <p>If you reside in Canada, including Québec, you have additional rights under PIPEDA (Personal Information Protection and Electronic Documents Act) and Québec's Law 25 (Act respecting the protection of personal information in the private sector):</p>
   <ul>
     <li>The right to access and correct your personal information</li>
@@ -182,17 +189,17 @@
   </ul>
   <p>To exercise these rights, contact us at <a href="mailto:support@cooksimpl.app">support@cooksimpl.app</a>.</p>
 
-  <h2>9. Security</h2>
+  <h2>11. Security</h2>
   <p>We implement appropriate technical measures to protect your information. However, no method of transmission over the internet or electronic storage is 100% secure. We cannot guarantee absolute security.</p>
 
-  <h2>10. Changes to This Policy</h2>
+  <h2>12. Changes to This Policy</h2>
   <p>We may update this Privacy Policy from time to time. We will notify you of significant changes by updating the "Last updated" date at the top of this page. Continued use of the App after changes constitutes acceptance of the updated policy.</p>
 
-  <h2>11. Contact Us</h2>
+  <h2>13. Contact Us</h2>
   <p>If you have any questions, concerns, or requests regarding this Privacy Policy, please contact us:</p>
   <ul>
     <li>Email: <a href="mailto:support@cooksimpl.app">support@cooksimpl.app</a></li>
-    <li>Business: cooksimpl (cuisinesimple), Brossard, Québec, Canada</li>
+    <li>Business: cooksimpl (cuisine simple), Québec, Canada</li>
   </ul>
 </div>
 
@@ -200,6 +207,7 @@
   <a href="/" class="footer-logo">cooksimpl</a>
   <div class="footer-links">
     <a href="/privacy">Privacy Policy</a>
+    <a href="/terms">Terms of Service</a>
     <a href="mailto:support@cooksimpl.app">Contact</a>
   </div>
   <p class="footer-copy">© 2026 cooksimpl. All rights reserved.</p>
