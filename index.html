@@ -7,7 +7,7 @@
   <meta name="description" content="Point your camera at your fridge. Get recipes in seconds. cooksimpl uses AI to turn what you have into what you want to eat.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -21,6 +21,11 @@
       --muted: rgba(21,19,15,0.52);
       --card: rgba(21,19,15,0.035);
       --border: rgba(21,19,15,0.09);
+      /* app UI tokens — used inside the phone mockup to match the real app */
+      --app-card: #EDEDE8;
+      --app-dark: #1A1A1A;
+      --app-medium: #73736E;
+      --app-light: #B8B7B2;
     }
 
     html { scroll-behavior: smooth; }
@@ -33,8 +38,6 @@
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
-
-    .display { font-family: 'Plus Jakarta Sans', sans-serif; }
 
     /* NAV */
     nav {
@@ -63,18 +66,24 @@
     /* HERO */
     .hero {
       min-height: 100vh;
-      display: flex; flex-direction: column;
+      display: flex;
       align-items: center; justify-content: center;
-      text-align: center;
-      padding: 120px 24px 80px;
+      gap: 64px;
+      padding: 140px 40px 80px;
       position: relative; overflow: hidden;
+      max-width: 1180px; margin: 0 auto;
     }
     .hero::before {
       content: '';
       position: absolute; inset: 0;
-      background: radial-gradient(ellipse 80% 60% at 50% 30%,
+      background: radial-gradient(ellipse 70% 60% at 30% 30%,
         rgba(212,184,150,0.18) 0%, transparent 70%);
       pointer-events: none;
+    }
+    .hero-copy {
+      flex: 1 1 420px;
+      max-width: 480px;
+      position: relative; z-index: 1;
     }
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: 8px;
@@ -97,13 +106,12 @@
     }
     .hero h1 {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: clamp(42px, 8vw, 80px);
+      font-size: clamp(38px, 6vw, 64px);
       font-weight: 800;
       line-height: 1.05;
       letter-spacing: -2px;
       margin-bottom: 24px;
-      max-width: 800px;
-      color: var(--ink);
+      text-wrap: balance;
     }
     .hero h1 em {
       font-style: normal;
@@ -113,11 +121,10 @@
       background-clip: text;
     }
     .hero p {
-      font-size: clamp(16px, 2vw, 20px);
+      font-size: clamp(16px, 2vw, 19px);
       font-weight: 400;
       color: var(--muted);
-      max-width: 480px;
-      margin-bottom: 48px;
+      margin-bottom: 40px;
     }
     .hero-cta {
       display: inline-flex; align-items: center; gap: 10px;
@@ -136,6 +143,109 @@
       box-shadow: 0 12px 40px rgba(21,19,15,0.26);
     }
     .hero-cta svg { width: 18px; height: 18px; }
+
+    /* ── PHONE DEMO LOOP ──────────────────────────────────────────────── */
+    .phone-demo {
+      flex: 0 0 auto;
+      position: relative; z-index: 1;
+    }
+    .phone-frame {
+      width: 280px; height: 580px;
+      background: #0A0A0A;
+      border-radius: 46px;
+      padding: 12px;
+      box-shadow: 0 30px 70px rgba(21,19,15,0.22), 0 4px 16px rgba(21,19,15,0.08);
+    }
+    .phone-notch {
+      position: absolute;
+      top: 24px; left: 50%; transform: translateX(-50%);
+      width: 90px; height: 24px;
+      background: #0A0A0A;
+      border-radius: 14px;
+      z-index: 5;
+    }
+    .phone-screen {
+      position: relative;
+      width: 100%; height: 100%;
+      background: var(--app-card);
+      border-radius: 36px;
+      overflow: hidden;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .scene {
+      position: absolute; inset: 0;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.45s ease;
+    }
+    .scene.active { opacity: 1; visibility: visible; z-index: 2; }
+
+    /* scene: fridge */
+    .scene-fridge img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .scanline {
+      position: absolute; left: 0; right: 0; top: -10%;
+      height: 36%;
+      background: linear-gradient(180deg, transparent 0%, rgba(212,184,150,0.55) 50%, transparent 100%);
+      pointer-events: none;
+    }
+    .scene-fridge.active .scanline { animation: sweep 1.15s ease-in-out 1; }
+    @keyframes sweep {
+      0%   { top: -40%; }
+      100% { top: 100%; }
+    }
+
+    /* scene: ingredients */
+    .scene-ingredients { background: #FFFFFF; padding: 58px 18px 18px; }
+    .scene-topbar {
+      font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      color: var(--app-light);
+      margin-bottom: 14px; padding: 0 2px;
+    }
+    .chip-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .chip {
+      background: var(--app-card);
+      border-radius: 14px;
+      padding: 12px 10px;
+      font-size: 13px; font-weight: 700;
+      color: var(--app-dark);
+      min-height: 46px;
+      display: flex; flex-direction: column; justify-content: center; gap: 2px;
+      letter-spacing: 0.5px;
+    }
+    .chip-name { font-size: 13px; font-weight: 700; color: var(--app-dark); }
+    .chip-qty { font-size: 11px; font-weight: 500; color: var(--app-medium); }
+    .scene-cta {
+      background: var(--beige);
+      color: var(--app-dark);
+      font-size: 14px; font-weight: 700;
+      text-align: center;
+      padding: 13px;
+      border-radius: 14px;
+      margin-top: 6px;
+    }
+
+    /* scene: recipes */
+    .scene-recipes { background: #FFFFFF; padding: 58px 18px 18px; }
+    .recipe-row {
+      display: flex; align-items: center; gap: 12px;
+      background: var(--app-card);
+      border-radius: 16px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    .recipe-row img {
+      width: 56px; height: 56px; border-radius: 12px; object-fit: cover;
+      flex-shrink: 0;
+    }
+    .recipe-title { font-size: 14px; font-weight: 700; color: var(--app-dark); margin-bottom: 3px; }
+    .recipe-time { font-size: 12px; font-weight: 500; color: var(--app-medium); }
 
     /* HOW IT WORKS */
     .section {
@@ -223,10 +333,17 @@
       width: 100%;
     }
 
+    @media (max-width: 900px) {
+      .hero { flex-direction: column; text-align: center; padding-top: 120px; }
+      .hero-copy { max-width: 560px; }
+      .hero-eyebrow { margin-left: auto; margin-right: auto; }
+    }
     @media (max-width: 600px) {
       nav { padding: 16px 20px; }
       footer { padding: 32px 20px; }
       .footer-links { flex-wrap: wrap; gap: 16px; }
+      .phone-frame { width: 230px; height: 476px; border-radius: 38px; }
+      .phone-screen { border-radius: 28px; }
     }
   </style>
 </head>
@@ -245,15 +362,62 @@
 </nav>
 
 <section class="hero">
-  <div class="hero-eyebrow">Coming to the App Store</div>
-  <h1>Scan your fridge.<br><em>Get recipes.</em></h1>
-  <p>Point your camera at what you have. cooksimpl figures out what you can make — in seconds.</p>
-  <a href="mailto:support@cooksimpl.app" class="hero-cta">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-      <path d="M18 8L22 12L18 16M6 12H22M2 4H10C11.1 4 12 4.9 12 6V18C12 19.1 11.1 20 10 20H2"/>
-    </svg>
-    Get notified at launch
-  </a>
+  <div class="hero-copy">
+    <div class="hero-eyebrow">Coming to the App Store</div>
+    <h1>Scan your fridge.<br><em>Get recipes.</em></h1>
+    <p>Point your camera at what you have. cooksimpl figures out what you can make — in seconds.</p>
+    <a href="mailto:support@cooksimpl.app" class="hero-cta">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M18 8L22 12L18 16M6 12H22M2 4H10C11.1 4 12 4.9 12 6V18C12 19.1 11.1 20 10 20H2"/>
+      </svg>
+      Get notified at launch
+    </a>
+  </div>
+
+  <div class="phone-demo">
+    <div class="phone-frame">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+
+        <div class="scene scene-fridge active">
+          <img src="assets/fridge.jpg" alt="Open fridge full of fresh food">
+          <div class="scanline"></div>
+        </div>
+
+        <div class="scene scene-ingredients">
+          <p class="scene-topbar">Ingredients found</p>
+          <div class="chip-grid">
+            <div class="chip" data-final="Chicken breast" data-qty="500g"></div>
+            <div class="chip" data-final="Eggs" data-qty="6"></div>
+            <div class="chip" data-final="Bell pepper" data-qty="2"></div>
+            <div class="chip" data-final="Spinach" data-qty="200g"></div>
+            <div class="chip" data-final="Garlic" data-qty="3 cloves"></div>
+            <div class="chip" data-final="Greek yogurt" data-qty="500g"></div>
+          </div>
+          <div class="scene-cta">Generate recipes</div>
+        </div>
+
+        <div class="scene scene-recipes">
+          <p class="scene-topbar">Your recipes</p>
+          <div class="recipe-row">
+            <img src="https://cooksimpl-images.pages.dev/7455e359-04fa-45d0-ae10-f91ba3f67c82.jpg" alt="">
+            <div>
+              <div class="recipe-title">Salsa Chicken Skillet</div>
+              <div class="recipe-time">30 min</div>
+            </div>
+          </div>
+          <div class="recipe-row">
+            <img src="https://cooksimpl-images.pages.dev/686689fb-7eda-4eb9-b531-bc3d99ddd943.jpg" alt="">
+            <div>
+              <div class="recipe-title">Sheet Pan Pesto Chicken</div>
+              <div class="recipe-time">55 min</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 </section>
 
 <hr class="divider">
@@ -292,6 +456,56 @@
   </div>
   <p class="footer-copy">© 2026 cooksimpl. All rights reserved.</p>
 </footer>
+
+<script>
+(function () {
+  var scenes = document.querySelectorAll('.phone-demo .scene');
+  var holdTimes = [1300, 2700, 2200]; // fridge, ingredients, recipes (ms, after the fade-in)
+  var idx = 0;
+
+  var GLYPH_POOL = ['##!!', '@@%%', '!!1', '€#&', '%%$$', 'COM', '***', '??##', '&&!!', '$$@@', '#!$%', 'XXYY'];
+
+  function scrambleThenSettle(scene) {
+    var chips = scene.querySelectorAll('.chip');
+    var ticks = 0;
+    var iv = setInterval(function () {
+      chips.forEach(function (c) {
+        c.textContent = GLYPH_POOL[Math.floor(Math.random() * GLYPH_POOL.length)];
+      });
+      ticks++;
+      if (ticks > 6) {
+        clearInterval(iv);
+        chips.forEach(function (c) {
+          c.innerHTML = '<span class="chip-name">' + c.dataset.final + '</span>' +
+                         '<span class="chip-qty">' + c.dataset.qty + '</span>';
+        });
+      }
+    }, 90);
+  }
+
+  function showScene(i) {
+    scenes.forEach(function (s, j) { s.classList.toggle('active', j === i); });
+    if (scenes[i].classList.contains('scene-ingredients')) {
+      scrambleThenSettle(scenes[i]);
+    }
+    if (scenes[i].classList.contains('scene-fridge')) {
+      // restart the scanline sweep animation each loop
+      var sweep = scenes[i].querySelector('.scanline');
+      sweep.style.animation = 'none';
+      requestAnimationFrame(function () { sweep.style.animation = ''; });
+    }
+  }
+
+  function loop() {
+    showScene(idx);
+    var hold = holdTimes[idx];
+    idx = (idx + 1) % scenes.length;
+    setTimeout(loop, hold);
+  }
+
+  loop();
+})();
+</script>
 
 </body>
 </html>
